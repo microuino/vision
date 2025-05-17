@@ -1,29 +1,20 @@
+
 <!DOCTYPE html>
-<html>
-  <body>
-    <input type="file" accept="image/*" onchange="predict(event)">
-    <p id="result">النتيجة ستظهر هنا</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>تحكم بالكاميرا عبر الذكاء الاصطناعي</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>تحكم بالكاميرا والذكاء الاصطناعي</h1>
+    <div id="webcam-container"></div>
+    <p id="label">انتظر...</p>
+    <button onclick="connectSerial()">🔌 توصيل بـ Arduino</button>
+  </div>
 
-    <script type="module">
-      import * as tmImage from "https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest";
-
-      const URL = "https://yourdomain.com/model/";
-      let model, metadata;
-
-      async function loadModel() {
-        model = await tmImage.load(URL + "model.json", URL + "metadata.json");
-      }
-
-      loadModel();
-
-      async function predict(event) {
-        const image = document.createElement("img");
-        image.src = URL.createObjectURL(event.target.files[0]);
-        await image.decode();
-
-        const prediction = await model.predict(image);
-        document.getElementById("result").innerText = JSON.stringify(prediction);
-      }
-    </script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js"></script>
+  <script src="script.js"></script>
+</body>
 </html>
