@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <input type="file" accept="image/*" onchange="predict(event)">
+    <p id="result">النتيجة ستظهر هنا</p>
+
+    <script type="module">
+      import * as tmImage from "https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest";
+
+      const URL = "https://yourdomain.com/model/";
+      let model, metadata;
+
+      async function loadModel() {
+        model = await tmImage.load(URL + "model.json", URL + "metadata.json");
+      }
+
+      loadModel();
+
+      async function predict(event) {
+        const image = document.createElement("img");
+        image.src = URL.createObjectURL(event.target.files[0]);
+        await image.decode();
+
+        const prediction = await model.predict(image);
+        document.getElementById("result").innerText = JSON.stringify(prediction);
+      }
+    </script>
+  </body>
+</html>
