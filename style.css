@@ -1,0 +1,18 @@
+
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+.container {
+  margin-top: 50px;
+}
+#label {
+  font-size: 1.5em;
+  margin: 20px;
+  color: #333;
+}
+video {
+  border: 3px solid #ccc;
+  border-radius: 10px;
+}
